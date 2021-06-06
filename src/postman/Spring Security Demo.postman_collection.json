@@ -1,0 +1,598 @@
+{
+	"info": {
+		"_postman_id": "4d84dd21-8444-44a3-ada4-da6800d15c42",
+		"name": "Spring Security Demo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "User - List books",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{UserPwd}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{UserId}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{SiteUrl}}/books",
+							"protocol": "http",
+							"host": [
+								"{{SiteUrl}}"
+							],
+							"path": [
+								"books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User - Add Book",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 403 (forbidden)\", function () {\r",
+									"  pm.response.to.have.status(403);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{UserPwd}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{UserId}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Book title\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{SiteUrl}}/books",
+							"protocol": "http",
+							"host": [
+								"{{SiteUrl}}"
+							],
+							"path": [
+								"books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User -Delete Book",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 403 (forbidden)\", function () {\r",
+									"  pm.response.to.have.status(403);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{UserPwd}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{UserId}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{SiteUrl}}/books/123",
+							"protocol": "http",
+							"host": [
+								"{{SiteUrl}}"
+							],
+							"path": [
+								"books",
+								"123"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User - Update Book",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 403 (forbidden)\", function () {\r",
+									"  pm.response.to.have.status(403);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{UserPwd}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{UserId}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"122\",\r\n    \"title\": \"Book title\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{SiteUrl}}/books",
+							"protocol": "http",
+							"host": [
+								"{{SiteUrl}}"
+							],
+							"path": [
+								"books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User - Book Details",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{UserPwd}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{UserId}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{SiteUrl}}/books/d6b04266-656f-4823-933a-49b5a4ac803b",
+							"protocol": "http",
+							"host": [
+								"{{SiteUrl}}"
+							],
+							"path": [
+								"books",
+								"d6b04266-656f-4823-933a-49b5a4ac803b"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "admin",
+			"item": [
+				{
+					"name": "Admin - List books",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{AdminPwd}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{AdminId}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{SiteUrl}}/books",
+							"protocol": "http",
+							"host": [
+								"{{SiteUrl}}"
+							],
+							"path": [
+								"books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Admin - Add Book",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201 (created)\", function () {\r",
+									"  pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{AdminPwd}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{AdminId}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Book title\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{SiteUrl}}/books",
+							"protocol": "http",
+							"host": [
+								"{{SiteUrl}}"
+							],
+							"path": [
+								"books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Admin -Delete Book",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204 (no content)\", function () {\r",
+									"  pm.response.to.have.status(204);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{AdminPwd}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{AdminId}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{SiteUrl}}/books/2c253cb4-27e5-4ead-af7f-e086de27c661",
+							"protocol": "http",
+							"host": [
+								"{{SiteUrl}}"
+							],
+							"path": [
+								"books",
+								"2c253cb4-27e5-4ead-af7f-e086de27c661"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Admin - Update Book",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 202 (accepted)\", function () {\r",
+									"  pm.response.to.have.status(202);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{AdminPwd}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{AdminId}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"2c253cb4-27e5-4ead-af7f-e086de27c661\",\r\n    \"title\": \"Book title-modified\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{SiteUrl}}/books",
+							"protocol": "http",
+							"host": [
+								"{{SiteUrl}}"
+							],
+							"path": [
+								"books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Admin - Book Details",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{AdminPwd}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{AdminId}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{SiteUrl}}/books/2c253cb4-27e5-4ead-af7f-e086de27c661",
+							"protocol": "http",
+							"host": [
+								"{{SiteUrl}}"
+							],
+							"path": [
+								"books",
+								"2c253cb4-27e5-4ead-af7f-e086de27c661"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Public entrypoint",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{SiteUrl}}/public/hello",
+					"protocol": "http",
+					"host": [
+						"{{SiteUrl}}"
+					],
+					"path": [
+						"public",
+						"hello"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "SiteUrl",
+			"value": "localhost:8080"
+		},
+		{
+			"key": "UserId",
+			"value": "user"
+		},
+		{
+			"key": "UserPwd",
+			"value": "user"
+		},
+		{
+			"key": "AdminId",
+			"value": "admin"
+		},
+		{
+			"key": "AdminPwd",
+			"value": "admin"
+		}
+	]
+}
