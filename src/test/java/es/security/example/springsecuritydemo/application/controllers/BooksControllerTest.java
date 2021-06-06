@@ -1,5 +1,6 @@
 package es.security.example.springsecuritydemo.application.controllers;
 
+import es.security.example.springsecuritydemo.domain.valueobjects.IdValueObject;
 import es.security.example.springsecuritydemo.infrastructure.persistence.BooksMapper;
 import es.security.example.springsecuritydemo.objectmothers.BooksObjectMother;
 import lombok.SneakyThrows;
@@ -27,10 +28,7 @@ class BooksControllerTest extends BaseControllersTest{
     @Test
     @SneakyThrows
     void ShouldNotAllowAnonymousAccessToGetBook() {
-        val dto = BooksObjectMother.getDto();
-        booksRepository.save(BooksMapper.DtoToJpa(dto));
-
-        mockMvc.perform(get(BOOKS_URL + "/" + dto.getId()))
+        mockMvc.perform(get(BOOKS_URL + "/any-id"))
                 .andExpect(status().isUnauthorized());
     }
 
@@ -38,7 +36,7 @@ class BooksControllerTest extends BaseControllersTest{
     @SneakyThrows
     void ShouldNotAllowAnonymousAccessToAddBook() {
         val dto = BooksObjectMother.getDto();
-        booksRepository.save(BooksMapper.DtoToJpa(dto));
+        dto.setId(null);
 
         mockMvc.perform(post(BOOKS_URL)
                 .accept(MediaType.APPLICATION_JSON)
@@ -52,7 +50,6 @@ class BooksControllerTest extends BaseControllersTest{
     @SneakyThrows
     void ShouldNotAllowAnonymousAccessToUpdateBook() {
         val dto = BooksObjectMother.getDto();
-        booksRepository.save(BooksMapper.DtoToJpa(dto));
 
         mockMvc.perform(put(BOOKS_URL)
                 .accept(MediaType.APPLICATION_JSON)
@@ -65,10 +62,7 @@ class BooksControllerTest extends BaseControllersTest{
     @Test
     @SneakyThrows
     void ShouldNotAllowAnonymousAccessToDeleteBook() {
-        val dto = BooksObjectMother.getDto();
-        booksRepository.save(BooksMapper.DtoToJpa(dto));
-
-        mockMvc.perform(delete(BOOKS_URL + "/" + dto.getId()))
+        mockMvc.perform(delete(BOOKS_URL + "/any-id"))
                 .andExpect(status().isUnauthorized());
     }
 
@@ -96,7 +90,7 @@ class BooksControllerTest extends BaseControllersTest{
     @WithUserDetails("user")
     void ShouldNotAllowUserAccessToAddBook() {
         val dto = BooksObjectMother.getDto();
-        booksRepository.save(BooksMapper.DtoToJpa(dto));
+        dto.setId(null);
 
         mockMvc.perform(post(BOOKS_URL)
                 .accept(MediaType.APPLICATION_JSON)
@@ -111,7 +105,6 @@ class BooksControllerTest extends BaseControllersTest{
     @WithUserDetails("user")
     void ShouldNotAllowUserAccessToUpdateBook() {
         val dto = BooksObjectMother.getDto();
-        booksRepository.save(BooksMapper.DtoToJpa(dto));
 
         mockMvc.perform(put(BOOKS_URL)
                 .accept(MediaType.APPLICATION_JSON)
@@ -125,10 +118,7 @@ class BooksControllerTest extends BaseControllersTest{
     @SneakyThrows
     @WithUserDetails("user")
     void ShouldNotAllowUserAccessToDeleteBook() {
-        val dto = BooksObjectMother.getDto();
-        booksRepository.save(BooksMapper.DtoToJpa(dto));
-
-        mockMvc.perform(delete(BOOKS_URL + "/" + dto.getId()))
+        mockMvc.perform(delete(BOOKS_URL + "/any-id"))
                 .andExpect(status().isForbidden());
     }
 
@@ -154,9 +144,9 @@ class BooksControllerTest extends BaseControllersTest{
     @Test
     @SneakyThrows
     @WithUserDetails("admin")
-    void ShouldNotAllowAdminAccessToAddBook() {
+    void ShouldAllowAdminAccessToAddBook() {
         val dto = BooksObjectMother.getDto();
-        booksRepository.save(BooksMapper.DtoToJpa(dto));
+        dto.setId(null);
 
         mockMvc.perform(post(BOOKS_URL)
                 .accept(MediaType.APPLICATION_JSON)
@@ -169,7 +159,7 @@ class BooksControllerTest extends BaseControllersTest{
     @Test
     @SneakyThrows
     @WithUserDetails("admin")
-    void ShouldNotAllowAdminAccessToUpdateBook() {
+    void ShouldAllowAdminAccessToUpdateBook() {
         val dto = BooksObjectMother.getDto();
         booksRepository.save(BooksMapper.DtoToJpa(dto));
 
@@ -184,7 +174,7 @@ class BooksControllerTest extends BaseControllersTest{
     @Test
     @SneakyThrows
     @WithUserDetails("admin")
-    void ShouldNotAllowAdminAccessToDeleteBook() {
+    void ShouldAllowAdminAccessToDeleteBook() {
         val dto = BooksObjectMother.getDto();
         booksRepository.save(BooksMapper.DtoToJpa(dto));
 
