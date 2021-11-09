@@ -6,6 +6,7 @@ import es.security.example.springsecuritydemo.domain.valueobjects.IdValueObject;
 import es.security.example.springsecuritydemo.infrastructure.persistence.BooksRepository;
 import es.security.example.springsecuritydemo.infrastructure.persistence.security.*;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -16,6 +17,7 @@ import java.util.Set;
 
 @RequiredArgsConstructor
 @Component
+@Slf4j
 public class Bootstrap implements CommandLineRunner {
 
     private final RolesRepository rolesRepository;
@@ -26,6 +28,8 @@ public class Bootstrap implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
+        log.info("Loading default data...");
+
         val listAuthority = AuthorityEntity.builder().authority(ApplicationAuthority.LIST.getAuthority()).build();
         val readAuthority = AuthorityEntity.builder().authority(ApplicationAuthority.READ.getAuthority()).build();
         val writeAuthority = AuthorityEntity.builder().authority(ApplicationAuthority.WRITE.getAuthority()).build();
@@ -62,6 +66,8 @@ public class Bootstrap implements CommandLineRunner {
                 .build();
 
         usersRepository.saveAll(List.of(user, admin));
+
+        log.info("Data Loaded");
     }
 
 }
