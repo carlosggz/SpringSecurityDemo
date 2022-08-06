@@ -1,7 +1,8 @@
-package es.security.example.springsecuritydemo.application.handlers;
+package es.security.example.springsecuritydemo.domain.models;
 
 import lombok.Builder;
 import lombok.Value;
+
 import java.time.LocalDateTime;
 
 @Value

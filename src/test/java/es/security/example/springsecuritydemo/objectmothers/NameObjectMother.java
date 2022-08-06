@@ -1,10 +1,9 @@
 package es.security.example.springsecuritydemo.objectmothers;
 
-
-import com.github.javafaker.Faker;
 import es.security.example.springsecuritydemo.domain.valueobjects.NameValueObject;
 import lombok.SneakyThrows;
 import lombok.experimental.UtilityClass;
+import net.datafaker.Faker;
 
 @UtilityClass
 public class NameObjectMother {

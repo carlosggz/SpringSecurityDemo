@@ -1,4 +1,4 @@
-package es.security.example.springsecuritydemo.application.controllers;
+package es.security.example.springsecuritydemo.infrastructure.controllers;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

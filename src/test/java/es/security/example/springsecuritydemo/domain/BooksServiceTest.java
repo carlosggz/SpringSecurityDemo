@@ -1,12 +1,12 @@
-package es.security.example.springsecuritydemo.application.services;
+package es.security.example.springsecuritydemo.domain;
 
-import es.security.example.springsecuritydemo.domain.dtos.BookDto;
 import es.security.example.springsecuritydemo.domain.entities.Book;
 import es.security.example.springsecuritydemo.domain.exceptions.BookNotFoundException;
 import es.security.example.springsecuritydemo.domain.exceptions.InvalidArgumentsException;
+import es.security.example.springsecuritydemo.domain.models.BookDto;
 import es.security.example.springsecuritydemo.domain.stores.BooksStore;
 import es.security.example.springsecuritydemo.domain.valueobjects.IdValueObject;
-import es.security.example.springsecuritydemo.infrastructure.persistence.BooksMapper;
+import es.security.example.springsecuritydemo.infrastructure.persistence.books.BooksMapper;
 import es.security.example.springsecuritydemo.objectmothers.BooksObjectMother;
 import lombok.SneakyThrows;
 import lombok.val;
@@ -23,18 +23,22 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class BooksServiceImplTest {
+class BooksServiceTest {
 
     @Mock
     BooksStore booksStore;
 
     @InjectMocks
-    BooksServiceImpl booksService;
+    BooksService booksService;
 
     @Captor
     ArgumentCaptor<Book> bookArgumentCaptor;

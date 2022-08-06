@@ -1,7 +1,10 @@
 package es.security.example.springsecuritydemo.infrastructure.persistence;
 
-import es.security.example.springsecuritydemo.domain.dtos.BookDto;
+import es.security.example.springsecuritydemo.domain.models.BookDto;
 import es.security.example.springsecuritydemo.domain.valueobjects.IdValueObject;
+import es.security.example.springsecuritydemo.infrastructure.persistence.books.BooksMapper;
+import es.security.example.springsecuritydemo.infrastructure.persistence.books.BooksRepository;
+import es.security.example.springsecuritydemo.infrastructure.persistence.books.JpaBooksStore;
 import es.security.example.springsecuritydemo.objectmothers.BooksObjectMother;
 import lombok.SneakyThrows;
 import lombok.val;
@@ -13,7 +16,9 @@ import org.springframework.dao.EmptyResultDataAccessException;
 
 import java.util.HashMap;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
 class JpaBooksStoreTest {

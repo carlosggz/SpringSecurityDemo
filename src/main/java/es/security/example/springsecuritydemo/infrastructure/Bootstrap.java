@@ -2,10 +2,18 @@ package es.security.example.springsecuritydemo.infrastructure;
 
 import es.security.example.springsecuritydemo.domain.ApplicationAuthority;
 import es.security.example.springsecuritydemo.domain.ApplicationRol;
+import es.security.example.springsecuritydemo.domain.models.BookDto;
 import es.security.example.springsecuritydemo.domain.valueobjects.IdValueObject;
-import es.security.example.springsecuritydemo.infrastructure.persistence.BooksRepository;
-import es.security.example.springsecuritydemo.infrastructure.persistence.security.*;
+import es.security.example.springsecuritydemo.infrastructure.persistence.books.BooksMapper;
+import es.security.example.springsecuritydemo.infrastructure.persistence.books.BooksRepository;
+import es.security.example.springsecuritydemo.infrastructure.persistence.security.AuthoritiesRepository;
+import es.security.example.springsecuritydemo.infrastructure.persistence.security.AuthorityEntity;
+import es.security.example.springsecuritydemo.infrastructure.persistence.security.RoleEntity;
+import es.security.example.springsecuritydemo.infrastructure.persistence.security.RolesRepository;
+import es.security.example.springsecuritydemo.infrastructure.persistence.security.UserEntity;
+import es.security.example.springsecuritydemo.infrastructure.persistence.security.UsersRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.springframework.boot.CommandLineRunner;
@@ -27,6 +35,7 @@ public class Bootstrap implements CommandLineRunner {
     private final PasswordEncoder passwordEncoder;
 
     @Override
+    @SneakyThrows
     public void run(String... args) {
         log.info("Loading default data...");
 
@@ -66,6 +75,9 @@ public class Bootstrap implements CommandLineRunner {
                 .build();
 
         usersRepository.saveAll(List.of(user, admin));
+
+        var demoBook = BookDto.builder().id("12345678-1234-1234-1234-123456789012").title("Demo book").build();
+        booksRepository.save(BooksMapper.DtoToJpa(demoBook));
 
         log.info("Data Loaded");
     }

@@ -9,17 +9,17 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @Slf4j
 @RequiredArgsConstructor
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class SecurityConfig {
     private final SecurityErrorNotifierComponent securityErrorNotifierComponent;
 
     @Bean
@@ -27,9 +27,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests(authorize -> authorize
                         .antMatchers("/h2-console/**").permitAll()
@@ -53,5 +52,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         (req, res, ex) -> securityErrorNotifierComponent.reportsSecurityError(req, res, ex, HttpStatus.UNAUTHORIZED))
                 .accessDeniedHandler(
                         (req, res, ex) -> securityErrorNotifierComponent.reportsSecurityError(req, res, ex, HttpStatus.FORBIDDEN));
+
+        return http.build();
     }
 }

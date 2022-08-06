@@ -1,8 +1,7 @@
-package es.security.example.springsecuritydemo.domain.dtos;
+package es.security.example.springsecuritydemo.domain.models;
 
 import lombok.Builder;
 import lombok.Data;
-import lombok.Setter;
 
 @Data
 @Builder

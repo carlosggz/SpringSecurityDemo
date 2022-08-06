@@ -1,7 +1,7 @@
 package es.security.example.springsecuritydemo.infrastructure.components;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import es.security.example.springsecuritydemo.application.handlers.ApiErrorResult;
+import es.security.example.springsecuritydemo.domain.models.ApiErrorResult;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -43,7 +43,7 @@ public class SecurityErrorNotifierComponent {
     private void logUserInformation() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        if (!authentication.isAuthenticated()) {
+        if (Objects.isNull(authentication) || !authentication.isAuthenticated()) {
             log.error("There is no user information");
         }
         else {

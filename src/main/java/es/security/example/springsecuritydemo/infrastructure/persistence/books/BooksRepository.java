@@ -1,7 +1,6 @@
-package es.security.example.springsecuritydemo.infrastructure.persistence;
+package es.security.example.springsecuritydemo.infrastructure.persistence.books;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.CrudRepository;
 
 public interface BooksRepository extends JpaRepository<BookEntity, String> {
 }

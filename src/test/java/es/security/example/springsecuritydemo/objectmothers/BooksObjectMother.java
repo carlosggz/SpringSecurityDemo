@@ -1,12 +1,12 @@
 package es.security.example.springsecuritydemo.objectmothers;
 
-import com.github.javafaker.Faker;
-import es.security.example.springsecuritydemo.domain.dtos.BookDto;
 import es.security.example.springsecuritydemo.domain.entities.Book;
+import es.security.example.springsecuritydemo.domain.models.BookDto;
 import es.security.example.springsecuritydemo.domain.valueobjects.IdValueObject;
 import es.security.example.springsecuritydemo.domain.valueobjects.TitleValueObject;
 import lombok.SneakyThrows;
 import lombok.experimental.UtilityClass;
+import net.datafaker.Faker;
 
 @UtilityClass
 public class BooksObjectMother {

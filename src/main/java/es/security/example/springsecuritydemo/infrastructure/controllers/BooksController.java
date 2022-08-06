@@ -1,16 +1,24 @@
-package es.security.example.springsecuritydemo.application.controllers;
+package es.security.example.springsecuritydemo.infrastructure.controllers;
 
-import es.security.example.springsecuritydemo.domain.dtos.BookDto;
-import es.security.example.springsecuritydemo.application.services.BooksService;
+import es.security.example.springsecuritydemo.domain.BooksService;
 import es.security.example.springsecuritydemo.domain.exceptions.BookNotFoundException;
 import es.security.example.springsecuritydemo.domain.exceptions.InvalidArgumentsException;
+import es.security.example.springsecuritydemo.domain.models.BookDto;
 import es.security.example.springsecuritydemo.infrastructure.components.BookDeleteAccess;
 import es.security.example.springsecuritydemo.infrastructure.components.BookListAccess;
 import es.security.example.springsecuritydemo.infrastructure.components.BookReadAccess;
 import es.security.example.springsecuritydemo.infrastructure.components.BookWriteAccess;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -41,8 +49,8 @@ public class BooksController {
     @BookWriteAccess
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public void addBook(@RequestBody BookDto bookDto) throws InvalidArgumentsException {
-        booksService.add(bookDto);
+    public String addBook(@RequestBody BookDto bookDto) throws InvalidArgumentsException {
+        return booksService.add(bookDto).getId();
     }
 
     @BookWriteAccess

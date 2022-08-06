@@ -1,4 +1,4 @@
-package es.security.example.springsecuritydemo.application.controllers;
+package es.security.example.springsecuritydemo.infrastructure.persistence.controllers;
 
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.DisplayName;

@@ -1,7 +1,6 @@
-package es.security.example.springsecuritydemo.application.controllers;
+package es.security.example.springsecuritydemo.infrastructure.persistence.controllers;
 
-import es.security.example.springsecuritydemo.domain.valueobjects.IdValueObject;
-import es.security.example.springsecuritydemo.infrastructure.persistence.BooksMapper;
+import es.security.example.springsecuritydemo.infrastructure.persistence.books.BooksMapper;
 import es.security.example.springsecuritydemo.objectmothers.BooksObjectMother;
 import lombok.SneakyThrows;
 import lombok.val;
@@ -10,7 +9,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithUserDetails;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest

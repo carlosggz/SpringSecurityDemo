@@ -1,8 +1,8 @@
 package es.security.example.springsecuritydemo.domain.stores;
 
-import es.security.example.springsecuritydemo.domain.dtos.BookDto;
 import es.security.example.springsecuritydemo.domain.entities.Book;
 import es.security.example.springsecuritydemo.domain.exceptions.InvalidArgumentsException;
+import es.security.example.springsecuritydemo.domain.models.BookDto;
 import es.security.example.springsecuritydemo.domain.valueobjects.IdValueObject;
 
 import java.util.List;

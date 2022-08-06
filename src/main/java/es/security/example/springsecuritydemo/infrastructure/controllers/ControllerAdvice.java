@@ -1,7 +1,8 @@
-package es.security.example.springsecuritydemo.application.handlers;
+package es.security.example.springsecuritydemo.infrastructure.controllers;
 
 import es.security.example.springsecuritydemo.domain.exceptions.BookNotFoundException;
 import es.security.example.springsecuritydemo.domain.exceptions.InvalidArgumentsException;
+import es.security.example.springsecuritydemo.domain.models.ApiErrorResult;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;

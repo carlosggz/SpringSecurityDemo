@@ -1,7 +1,7 @@
-package es.security.example.springsecuritydemo.application.controllers;
+package es.security.example.springsecuritydemo.infrastructure.persistence.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import es.security.example.springsecuritydemo.infrastructure.persistence.BooksRepository;
+import es.security.example.springsecuritydemo.infrastructure.persistence.books.BooksRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.MockMvc;

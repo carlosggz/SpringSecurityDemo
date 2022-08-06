@@ -1,11 +1,11 @@
-package es.security.example.springsecuritydemo.application.services;
+package es.security.example.springsecuritydemo.domain;
 
-import es.security.example.springsecuritydemo.domain.dtos.BookDto;
 import es.security.example.springsecuritydemo.domain.exceptions.BookNotFoundException;
 import es.security.example.springsecuritydemo.domain.exceptions.InvalidArgumentsException;
+import es.security.example.springsecuritydemo.domain.models.BookDto;
 import es.security.example.springsecuritydemo.domain.stores.BooksStore;
 import es.security.example.springsecuritydemo.domain.valueobjects.IdValueObject;
-import es.security.example.springsecuritydemo.infrastructure.persistence.BooksMapper;
+import es.security.example.springsecuritydemo.infrastructure.persistence.books.BooksMapper;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.val;
@@ -18,15 +18,13 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
-public class BooksServiceImpl implements BooksService {
+public class BooksService {
     private final BooksStore booksStore;
 
-    @Override
     public List<BookDto> getBooks() {
         return booksStore.getBooks();
     }
 
-    @Override
     public Optional<BookDto> getById(@NonNull String id) throws InvalidArgumentsException {
 
         return booksStore
@@ -34,17 +32,16 @@ public class BooksServiceImpl implements BooksService {
                 .map(BooksMapper::EntityToDto);
     }
 
-    @Override
-    public void add(@NonNull BookDto bookDto) throws InvalidArgumentsException {
+    public IdValueObject add(@NonNull BookDto bookDto) throws InvalidArgumentsException {
         if (!StringUtils.isBlank(bookDto.getId())) {
             throw new InvalidArgumentsException("New books must not have an id");
         }
 
         val book = BooksMapper.DtoToEntity(bookDto);
         booksStore.save(book);
+        return book.getId();
     }
 
-    @Override
     public void update(@NonNull BookDto bookDto) throws InvalidArgumentsException {
         if (StringUtils.isBlank(bookDto.getId())) {
             throw new InvalidArgumentsException("Invalid id");
@@ -54,7 +51,6 @@ public class BooksServiceImpl implements BooksService {
         booksStore.save(book);
     }
 
-    @Override
     public void delete(@NonNull String id) throws InvalidArgumentsException, BookNotFoundException {
         try {
             booksStore.delete(new IdValueObject(id));
